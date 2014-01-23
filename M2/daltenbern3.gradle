@@ -1,1 +1,1 @@
-task hello << {    println 'Hello world!'}
+apply plugin: 'java'
