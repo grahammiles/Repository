@@ -32,6 +32,7 @@ public class Person1 {
 	private String calc(String input) {
 	  char[] c;
 	  c = input.toCharArray();
+	  
 	  return null;
 	}
 	
