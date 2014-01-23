@@ -30,7 +30,7 @@ public class Person2 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-	  //Person 2 put your implementation here
+	  
 	  return null;
 	}
 	/**
