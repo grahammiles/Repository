@@ -21,7 +21,7 @@ repositories {
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
-    compile files('/Users/svermeyen1/Documents/CS2340/Project/Repository/M2/lib/resources.jar')
+    compile files('lib/resources.jar')
 
 }
 
