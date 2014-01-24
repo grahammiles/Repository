@@ -41,7 +41,7 @@ public class Person2 {
             int random = (int)(Math.random()*letters.size());
             newString.append(letters.remove(random));
         }
-	    //System.out.println(newString.toString());
+	    //System.out.println(newString.toString()); idk
         return newString.toString(); 
 	}
 	/**
