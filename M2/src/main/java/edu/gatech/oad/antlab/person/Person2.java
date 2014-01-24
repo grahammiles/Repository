@@ -42,7 +42,7 @@ public class Person2 {
             newString.append(letters.remove(random));
         }
 	    //System.out.println(newString.toString()); idk
-        return newString.toString(); 
+        return newString.toString() + " "; 
 	}
 	/**
 	 * Return a string rep of this object
@@ -53,6 +53,6 @@ public class Person2 {
 	 *         object
 	 */
 	public String toString(String input) {
-	  return name + calc(input);
+	  return name + " " + calc(input);
 	}
 }
