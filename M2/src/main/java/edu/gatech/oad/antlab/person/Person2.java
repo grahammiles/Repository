@@ -41,7 +41,7 @@ public class Person2 {
             int random = (int)(Math.random()*letters.size());
             newString.append(letters.remove(random));
         }
-        return newString.toString(); 
+        return newString.toString() + " "; 
 	}
 	/**
 	 * Return a string rep of this object
