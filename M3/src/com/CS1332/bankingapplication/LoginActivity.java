@@ -33,12 +33,6 @@ public class LoginActivity extends Activity implements BankingView {
 		prompt = (TextView) findViewById(R.id.textView1);
 	}
 	
-//	public void gotoLoginScreenActivity(View v) {
-//		Intent intent = new Intent(this, LoginActivity.class);
-//		startActivity(intent);
-//		
-//	}
-	
 	public void onLoginClick(View v) {
 		listener.onClick();
 	}
