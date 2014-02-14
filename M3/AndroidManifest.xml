@@ -26,6 +26,8 @@
             android:name=".LoginActivity" />
         <activity
             android:name=".RegisterActivity" />
+        <activity
+            android:name=".LoginScreenActivity" />
     </application>
 
 </manifest>
