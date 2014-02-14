@@ -21,10 +21,17 @@ public class WelcomeActivity extends Activity {
 		return true;
 	}
 	
-	public void gotoActivity(View v) {
+	public void gotoLoginActivity(View v) {
 		
 		Intent intent = new Intent(this, LoginActivity.class);
 		startActivity(intent);
+		
+	}
+	
+	public void gotoRegisterActivity(View v) {
+		
+		Intent intent2 = new Intent(this, RegisterActivity.class);
+		startActivity(intent2);
 		
 	}
 
