@@ -9,7 +9,7 @@ public class BankingDBOpenHelper extends SQLiteOpenHelper {
 //	private static final String LOGTAG = "EXPLOREDB";
 
 	private static final String DATABASE_NAME = "bank.db";
-	private static final int DATABASE_VERSION = 11;
+	private static final int DATABASE_VERSION = 17;
 	
 	public static final String TABLE_BANK = "User";
 	public static final String COLUMN_ID = "bankId";

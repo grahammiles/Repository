@@ -6,4 +6,5 @@ public interface BankingView {
 	String getPassword();
 	void addSearchRequestNotifyCallback(ClickListener listener);
 	void transition(boolean isUser);
+	void setPrompt(String string);
 }

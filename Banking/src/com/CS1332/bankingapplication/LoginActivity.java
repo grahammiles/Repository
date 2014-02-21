@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.CS1332.bankingapplication.R;
 import com.CS1332.bankingapplication.db.BankDataSource;
 import com.CS1332.bankingapplication.models.BankingModel;
 import com.CS1332.bankingapplication.presenters.BankingPresenter;
@@ -30,8 +29,6 @@ public class LoginActivity extends Activity implements BankingView {
 		setContentView(R.layout.activity_login);
 		
 		datasource = new BankDataSource(this);
-		datasource.open();
-		datasource.close();
 		presenter = new BankingPresenter(this, new BankingModel(datasource));
 		
 		nameField =  (EditText) findViewById(R.id.editText1);
@@ -58,15 +55,16 @@ public class LoginActivity extends Activity implements BankingView {
 		return passwordField.getText().toString();
 	}
 	
+	public void setPrompt(String msg) {
+		prompt.setText(msg);
+		return;
+	}
+	
 	public void transition(boolean isUser) {
 		if (isUser) {
-			prompt.setText("Success!");
 			Intent intent = new Intent(this, LoginScreenActivity.class);
 			startActivity(intent);
-		} else {
-			prompt.setText("Invalid login details. Please try again.");
 		}
-			
 	}
 	
 }

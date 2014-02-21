@@ -19,14 +19,20 @@ public class BankingPresenter implements ClickListener {
 	public void onClick(boolean isRegistering) {
 		String username = view.getUsername();
 		String password = view.getPassword();
-		if (isRegistering) {
-				model.openDatasource();
-				model.getDatasource().create(new User(username, password));
-				model.closeDatasource();
-				view.transition(true);
-		} else {
+		if (isRegistering && (username.length() != 0) && (password.length() != 0) && (model.isUser(username) == false)) {
+			model.openDatasource();
+			model.getDatasource().create(new User(username, password));
+			model.closeDatasource();
+			view.transition(true);
+		} else if (!isRegistering && (username.length() != 0) && (password.length() != 0)) {
 			boolean isUser = model.isUser(username, password);
-			view.transition(isUser);
+			if (isUser) {
+				view.transition(isUser);
+			} else {
+				view.setPrompt("Login failed");
+			}
+		} else {
+			view.setPrompt("Account information invalid. Please register again.");
 		}
 	}
 

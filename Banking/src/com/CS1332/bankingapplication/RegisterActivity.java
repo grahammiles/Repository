@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.CS1332.bankingapplication.db.BankDataSource;
 import com.CS1332.bankingapplication.models.BankingModel;
@@ -18,6 +19,7 @@ public class RegisterActivity extends Activity implements BankingView {
 	BankingPresenter presenter;
     EditText nameField;
     EditText passwordField;
+    TextView prompt;
     BankDataSource datasource;
     private boolean isRegistering = true;
     
@@ -31,6 +33,8 @@ public class RegisterActivity extends Activity implements BankingView {
 		
 		nameField =  (EditText) findViewById(R.id.editText1);
 		passwordField =  (EditText) findViewById(R.id.editText2);
+		prompt = (TextView) findViewById(R.id.textView1);
+
 		
 	}	
 	public void onRegisterClick(View v) {
@@ -57,4 +61,8 @@ public class RegisterActivity extends Activity implements BankingView {
 			startActivity(intent);
 	}
 	
+	public void setPrompt(String msg) {
+		prompt.setText(msg);
+		return;
+	}
 }

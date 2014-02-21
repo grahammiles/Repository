@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 
-import com.CS1332.bankingapplication.R;
 import com.CS1332.bankingapplication.db.BankDataSource;
 
 public class WelcomeActivity extends Activity {
@@ -18,9 +17,9 @@ public class WelcomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
-		datasource = new BankDataSource(this);
-		datasource.open();
-		datasource.close();
+//		datasource = new BankDataSource(this);
+//		datasource.open();
+//		datasource.close();
 		
 	}
 
