@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.CS1332.bankingapplication.db.BankDataSource;
-import com.CS1332.bankingapplication.models.BankingModel;
 import com.CS1332.bankingapplication.presenters.BankingPresenter;
 import com.CS1332.bankingapplication.views.BankingView;
 import com.CS1332.bankingapplication.views.ClickListener;
@@ -28,8 +27,8 @@ public class LoginActivity extends Activity implements BankingView {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
-		datasource = new BankDataSource(this);
-		presenter = new BankingPresenter(this, new BankingModel(datasource));
+		presenter = BankingPresenter.getInstance();
+		presenter.setBankView(this);
 		
 		nameField =  (EditText) findViewById(R.id.editText1);
 		passwordField =  (EditText) findViewById(R.id.editText2);
@@ -37,7 +36,9 @@ public class LoginActivity extends Activity implements BankingView {
 		
 	}	
 	public void onLoginClick(View v) {
-		listener.onClick(isRegistering);
+		presenter.setBankView(this);
+		presenter.setRegistering(isRegistering);
+		listener.onClick();
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class LoginActivity extends Activity implements BankingView {
 	
 	public void transition(boolean isUser) {
 		if (isUser) {
-			Intent intent = new Intent(this, LoginScreenActivity.class);
+			Intent intent = new Intent(this, AccountScreenActivity.class);
 			startActivity(intent);
 		}
 	}

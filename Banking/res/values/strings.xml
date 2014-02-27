@@ -8,5 +8,11 @@
     <string name="welcome">Welcome! Select button to log-in or register.</string>
     <string name="register">Register</string>
     <string name="loggedin">You are now logged in.</string>
-
+    <string name="create_account">Create Account</string>
+    <string name="title_activity_create_account">CreateAccountActivity</string>
+	<string name="full_name">Full name</string>
+	<string name="display_name">Display name (shorter than full)</string>
+	<string name="balance">Balance</string>
+	<string name="mir">Monthly Interest Rate</string>
+	<string name="account">Accounts</string>
 </resources>

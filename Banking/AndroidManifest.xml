@@ -22,12 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.CS1332.bankingapplication.LoginActivity" />
+        <activity android:name="com.CS1332.bankingapplication.RegisterActivity" />
+        <activity android:name="com.CS1332.bankingapplication.AccountScreenActivity" />
         <activity
-            android:name=".LoginActivity" />
-        <activity
-            android:name=".RegisterActivity" />
-        <activity
-            android:name=".LoginScreenActivity" />
+            android:name="com.CS1332.bankingapplication.CreateAccountActivity"
+            android:label="@string/title_activity_create_account" >
+        </activity>
     </application>
 
 </manifest>

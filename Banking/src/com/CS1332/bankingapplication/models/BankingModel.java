@@ -10,8 +10,8 @@ public class BankingModel implements Model {
 	private Map<String, User> users;
 	private BankDataSource datasource;
 
-	public BankingModel(BankDataSource datasource) {
-		this.datasource = datasource;
+	public BankingModel() {
+		this.datasource = new BankDataSource();
 		initialize();
 	}
 

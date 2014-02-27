@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.CS1332.bankingapplication.db.BankDataSource;
-import com.CS1332.bankingapplication.models.BankingModel;
 import com.CS1332.bankingapplication.presenters.BankingPresenter;
 import com.CS1332.bankingapplication.views.BankingView;
 import com.CS1332.bankingapplication.views.ClickListener;
@@ -28,8 +27,8 @@ public class RegisterActivity extends Activity implements BankingView {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
 		
-		datasource = new BankDataSource(this);
-		presenter = new BankingPresenter(this, new BankingModel(datasource));
+		presenter = BankingPresenter.getInstance();
+		presenter.setBankView(this);
 		
 		nameField =  (EditText) findViewById(R.id.editText1);
 		passwordField =  (EditText) findViewById(R.id.editText2);
@@ -38,7 +37,9 @@ public class RegisterActivity extends Activity implements BankingView {
 		
 	}	
 	public void onRegisterClick(View v) {
-		listener.onClick(isRegistering);
+		presenter.setBankView(this);
+		presenter.setRegistering(isRegistering);
+		listener.onClick();
 	}
 
 	@Override
