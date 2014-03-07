@@ -15,4 +15,13 @@
 	<string name="balance">Balance</string>
 	<string name="mir">Monthly Interest Rate</string>
 	<string name="account">Accounts</string>
+	<string name="deposit">Deposit</string>
+	<string name="withdrawal">Withdraw</string>
+	<string name="view_deposit">View Deposits</string>
+	<string name="view_withdrawals">View Withdrawals</string>
+	<string name="reason">Reason</string>
+	<string name="amount">Amount</string>
+	<string name="date">Date</string>
+	<string name="transaction">Create Transaction</string>
+	
 </resources>

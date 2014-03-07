@@ -1,5 +1,6 @@
 package com.CS1332.bankingapplication.models;
 
+
 public class Account {
 	
 	private String user;

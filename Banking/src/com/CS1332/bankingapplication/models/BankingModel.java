@@ -29,7 +29,7 @@ public class BankingModel implements Model {
 	@Override
 	public boolean isUser(final String username, final String password) {
 		User user = users.get(username);
-		if (user != null && user.getPassword().equals(password)) {
+		if (user != null && user.checkPassword(password)) {
 			return true;
 		} else {
 			return false;

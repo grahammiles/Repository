@@ -25,6 +25,10 @@
         <activity android:name="com.CS1332.bankingapplication.LoginActivity" />
         <activity android:name="com.CS1332.bankingapplication.RegisterActivity" />
         <activity android:name="com.CS1332.bankingapplication.AccountScreenActivity" />
+        <activity android:name="com.CS1332.bankingapplication.TransactionActivity" />
+        <activity android:name="com.CS1332.bankingapplication.CreateTransactionActivity" />
+        <activity android:name="com.CS1332.bankingapplication.DepositHistoryActivity" />
+         <activity android:name="com.CS1332.bankingapplication.WithdrawalHistoryActivity"></activity>   
         <activity
             android:name="com.CS1332.bankingapplication.CreateAccountActivity"
             android:label="@string/title_activity_create_account" >

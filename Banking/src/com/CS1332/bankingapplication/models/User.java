@@ -43,5 +43,13 @@ public class User {
 	public void setId(long insertid) {
 		this.id = insertid;
 	}
+	
+	public boolean checkPassword(String password) {
+		if (this.password.equals(password)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }
