@@ -1,6 +1,10 @@
 package com.CS1332.bankingapplication.presenters;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
@@ -10,10 +14,10 @@ import com.CS1332.bankingapplication.models.BankingModel;
 import com.CS1332.bankingapplication.models.Deposit;
 import com.CS1332.bankingapplication.models.Model;
 import com.CS1332.bankingapplication.models.Transaction;
-import com.CS1332.bankingapplication.models.User;
 import com.CS1332.bankingapplication.models.Withdrawal;
 import com.CS1332.bankingapplication.views.BankingView;
 import com.CS1332.bankingapplication.views.ClickListener;
+import com.CS1332.bankingapplication.views.ReportView;
 import com.CS1332.bankingapplication.views.TransactionView;
 import com.CS1332.bankingapplication.views.UserView;
 
@@ -22,40 +26,26 @@ public class BankingPresenter implements ClickListener {
 	private BankingView bankView;
 	private TransactionView transactionView;
 	private UserView userView;
+	private ReportView reportView;
 	private Model model;
 	public static String username;
 	private boolean isRegistering;
 	private boolean isDepositing;
 	private boolean withdrawInitialized = false;
 	private boolean depositInitialized = false;
-
+	SimpleDateFormat dateFormat;
 	Account account;
 
-
-//	public BankingPresenter(BankingView view, BankingModel model) {
-//		this.bankView = view;
-//		this.model = model;
-//		this.bankView.addSearchRequestNotifyCallback(BankingPresenter.getInstance());
-//	}
-//
-//	public BankingPresenter(UserView view, BankingModel model) {
-//		this.userView = view;
-//		this.model = model;
-//		this.userView.addSearchRequestNotifyCallback(BankingPresenter.getInstance());
-//	}
-
-	public BankingPresenter(BankingModel model) {
+	private BankingPresenter(BankingModel model) {
 		this.model = model;
-		model.openDatasource();
-		List<Transaction> deposits = model.getDatasource().findAllDeposits();
-		List<Transaction> withdrawals = model.getDatasource().findAllWithdrawals();
+		List<Transaction> deposits = model.findAllDeposits();
+		List<Transaction> withdrawals = model.findAllWithdrawals();
 		if (!deposits.isEmpty()) {
 			depositInitialized = true;
 		}
 		if (!withdrawals.isEmpty()) {
 			withdrawInitialized = true;
 		}
-		model.closeDatasource();
 	}
 
 	@Override
@@ -63,9 +53,7 @@ public class BankingPresenter implements ClickListener {
 		String username = bankView.getUsername();
 		String password = bankView.getPassword();
 		if (isRegistering && (username.length() > 0) && (password.length() > 0) && (model.isUser(username) == false)) {
-			model.openDatasource();
-			model.getDatasource().create(new User(username, password)); // move functionality
-			model.closeDatasource();
+			model.createUser(username, password);
 			model.initialize();
 			bankView.transition(true);
 		} else if (!isRegistering && (username.length() > 0) && (password.length() > 0)) {
@@ -89,10 +77,7 @@ public class BankingPresenter implements ClickListener {
 		Double mir = userView.getMir();
 
 		if (name.trim().length() > 0 && display.trim().length() > 0 && balance != null && mir != null) {
-
-			model.openDatasource();
-			model.getDatasource().addToAccount(new Account(BankingPresenter.username, name, display, balance, mir)); // Switch all of this logic to model, add a method called addtoAccount to Model
-			model.closeDatasource();
+			model.addToAccount(BankingPresenter.username, name, display, balance, mir);
 			userView.setPrompt("");
 		} else {
 			userView.setPrompt("More account information required. Please fill in all data fields.");
@@ -109,34 +94,52 @@ public class BankingPresenter implements ClickListener {
 			depositInitialized = true;
 			Deposit deposit = new Deposit(reason, amount, this.account);
 			this.account = deposit.modifyAccount(this.account);
-			model.openDatasource();
-			model.getDatasource().updateAccount(this.account);
-			model.getDatasource().addToDeposit(deposit);
-			model.closeDatasource();
+			model.updateAccount(this.account);
+			model.addToDeposit(deposit);
 			transactionView.setPrompt("");
 		} else if (reason.length() > 0 && amount != null && !isDepositing) {
 			withdrawInitialized = true;
 			Withdrawal withdrawal = new Withdrawal(reason, amount, this.account);
 			this.account = withdrawal.modifyAccount(this.account);
-			model.openDatasource();
-			model.getDatasource().updateAccount(this.account);
-			model.getDatasource().addToWithdrawal(withdrawal);
-			model.closeDatasource();
+			model.updateAccount(this.account);
+			model.addToWithdrawal(withdrawal);
 			transactionView.setPrompt("");
 		} else {
 			transactionView.setPrompt("Please fill in all data fields.");
+		}
+	}
+
+	@Override
+	public void onCreateReportClick() throws ParseException {
+		String startDate = reportView.getStartDate();
+		String endDate = reportView.getEndDate();
+		startDate = startDate.trim();
+		endDate = endDate.trim();
+
+		if (startDate.length() > 0 && endDate.length() > 0) {
+			dateFormat = new SimpleDateFormat("MM/dd/yyyy kk:mm:ss.SSS", Locale.ENGLISH);
+			Date d1 = dateFormat.parse(startDate + " 00:00:00.000");
+			Date d2 = dateFormat.parse(endDate + " 23:59:59.999");
+			long startTimeInMillisSinceEpoch = d1.getTime();
+			long endTimeInMillisSinceEpoch = d2.getTime();
+			String[] args = new String[] { BankingPresenter.username, Long.toString(startTimeInMillisSinceEpoch), Long.toString(endTimeInMillisSinceEpoch) };
+			reportView.setTitle("Spending Category Report for " + BankingPresenter.username + "\n" + "from " + startDate + " to " + endDate);
+			String description = model.getSpendingReportText(args);
+			reportView.setText(description);
 
 		}
 
 	}
+
 	public void setAccount(int position) {
 		Account account = getAccountToModify(position);
 		this.account = account;
 	}
+
 	public boolean isWithdrawInitialized() {
 		return withdrawInitialized;
 	}
-	
+
 	public boolean isDepositInitialized() {
 		return depositInitialized;
 	}
@@ -158,17 +161,22 @@ public class BankingPresenter implements ClickListener {
 
 	public void setBankView(BankingView bankView) {
 		this.bankView = bankView;
-		this.bankView.addSearchRequestNotifyCallback(BankingPresenter.getInstance());
+//		this.bankView.addSearchRequestNotifyCallback(BankingPresenter.getInstance());
 	}
 
 	public void setUserView(UserView userView) {
 		this.userView = userView;
-		this.userView.addSearchRequestNotifyCallback(BankingPresenter.getInstance());
+//		this.userView.addSearchRequestNotifyCallback(BankingPresenter.getInstance());
 	}
 
 	public void setTransactionView(TransactionView transactionView) {
 		this.transactionView = transactionView;
-		this.transactionView.addSearchRequestNotifyCallback(BankingPresenter.getInstance());
+//		this.transactionView.addSearchRequestNotifyCallback(BankingPresenter.getInstance());
+	}
+
+	public void setReportView(ReportView reportView) {
+		this.reportView = reportView;
+//		this.reportView.addSearchRequestNotifyCallback(BankingPresenter.getInstance());
 	}
 
 	public void setRegistering(boolean isRegistering) {
@@ -177,36 +185,33 @@ public class BankingPresenter implements ClickListener {
 
 	public ArrayAdapter<Account> getAccountAdapter(Context cxt) {
 		String[] args = new String[] { BankingPresenter.username };
-		model.openDatasource();
-		List<Account> accounts = model.getDatasource().findAccount(args, "balance ASC");
-		model.closeDatasource();
+		List<Account> accounts = model.findAccount(args, "balance ASC");
 		ArrayAdapter<Account> adapter = new ArrayAdapter<Account>(cxt, android.R.layout.simple_list_item_1, accounts);
 		return adapter;
 	}
 
 	public ArrayAdapter<Transaction> getDepositAdapter(Context cxt) {
 		String[] args = new String[] { BankingPresenter.username, account.getName() };
-		model.openDatasource();
-		List<Transaction> transactions = model.getDatasource().findDeposits(args, "amount ASC");
-		model.closeDatasource();
+		List<Transaction> transactions = model.findDeposits(args, "amount ASC");
 		ArrayAdapter<Transaction> adapter = new ArrayAdapter<Transaction>(cxt, android.R.layout.simple_list_item_1, transactions);
 		return adapter;
 	}
 
 	public ArrayAdapter<Transaction> getWithdrawalAdapter(Context cxt) {
 		String[] args = new String[] { BankingPresenter.username, account.getName() };
-		model.openDatasource();
-		List<Transaction> transactions = model.getDatasource().findWithdrawals(args, "amount DESC");
-		model.closeDatasource();
+		List<Transaction> transactions = model.findWithdrawals(args, "amount DESC");
 		ArrayAdapter<Transaction> adapter = new ArrayAdapter<Transaction>(cxt, android.R.layout.simple_list_item_1, transactions);
 		return adapter;
 	}
 
+	public List<Transaction> getSpendingReportList(Context cxt, String[] args) {
+		List<Transaction> transactions = model.findWithdrawalsForSpendingReport(args, "amount DESC");
+		return transactions;
+	}
+
 	public Account getAccountToModify(int position) {
 		String[] args = new String[] { BankingPresenter.username };
-		model.openDatasource();
-		List<Account> accounts = model.getDatasource().findAccount(args, "balance ASC");
-		model.closeDatasource();
+		List<Account> accounts = model.findAccount(args, "balance ASC");
 		Account account = accounts.get(position);
 		return account;
 	}

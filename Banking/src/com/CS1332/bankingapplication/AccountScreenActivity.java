@@ -9,18 +9,17 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.CS1332.bankingapplication.presenters.BankingPresenter;
+import com.CS1332.bankingapplication.views.ClickListener;
 
 public class AccountScreenActivity extends ListActivity {
 	
-	BankingPresenter presenter;
+	ClickListener listener;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_account_screen);
-		presenter = BankingPresenter.getInstance();
-		
-		
+		listener = BankingPresenter.getInstance();
 	}
 	
 	@Override
@@ -31,8 +30,20 @@ public class AccountScreenActivity extends ListActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent = new Intent(this, CreateAccountActivity.class);
-		startActivity(intent);
+		Intent intent;
+		switch(item.getItemId()) {
+		
+		case R.id.create_account:
+			intent = new Intent(this, CreateAccountActivity.class);
+			startActivity(intent);
+			break;
+			
+		case R.id.build_report:
+			intent = new Intent(this, CreateReportActivity.class);
+			startActivity(intent);
+			break;
+		
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -43,14 +54,14 @@ public class AccountScreenActivity extends ListActivity {
 	}
 	
 	public void refreshDisplay() {
-		setListAdapter(presenter.getAccountAdapter(this));
+		setListAdapter(listener.getAccountAdapter(this));
 		
 	}
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		presenter.setAccount(position);
+		listener.setAccount(position);
 		Intent intent = new Intent(this, TransactionActivity.class);
 		startActivity(intent);
 		

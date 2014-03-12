@@ -4,18 +4,17 @@ import android.app.ListActivity;
 import android.os.Bundle;
 
 import com.CS1332.bankingapplication.presenters.BankingPresenter;
+import com.CS1332.bankingapplication.views.ClickListener;
 
 public class DepositHistoryActivity extends ListActivity {
 
-	BankingPresenter presenter;
+	ClickListener listener;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_account_screen);
-		presenter = BankingPresenter.getInstance();
-		
-		
+		listener = BankingPresenter.getInstance();
 	}
 	
 
@@ -26,8 +25,8 @@ public class DepositHistoryActivity extends ListActivity {
 	}
 	
 	public void refreshDisplay() {
-		if (presenter.isDepositInitialized()) {
-			setListAdapter(presenter.getDepositAdapter(this));
+		if (listener.isDepositInitialized()) {
+			setListAdapter(listener.getDepositAdapter(this));
 		}
 	}
 }

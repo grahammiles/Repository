@@ -6,10 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.CS1332.bankingapplication.presenters.BankingPresenter;
+import com.CS1332.bankingapplication.views.ClickListener;
 
 public class TransactionActivity extends Activity {
 
-	BankingPresenter presenter;
+	ClickListener listener;
 	int position;
 
 	@Override
@@ -17,13 +18,13 @@ public class TransactionActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_transaction);
 
-		presenter = BankingPresenter.getInstance();
+		listener = BankingPresenter.getInstance();
 
 	}
 
 	public void gotoCreateDepositActivity(View v) {
 		Intent intent = new Intent(this, CreateTransactionActivity.class);
-		presenter.setDepositing(true);
+		listener.setDepositing(true);
 		startActivity(intent);
 		finish();
 		return;
@@ -31,14 +32,14 @@ public class TransactionActivity extends Activity {
 
 	public void gotoCreateWithdrawalActivity(View v) {
 		Intent intent = new Intent(this, CreateTransactionActivity.class);
-		presenter.setDepositing(false);
+		listener.setDepositing(false);
 		startActivity(intent);
 		finish();
 		return;
 	}
 
 	public void gotoDepositHistory(View v) {
-		if (presenter.isDepositInitialized()) {
+		if (listener.isDepositInitialized()) {
 			Intent intent = new Intent(this, DepositHistoryActivity.class);
 			startActivity(intent);
 			finish();
@@ -46,7 +47,7 @@ public class TransactionActivity extends Activity {
 	}
 
 	public void gotoWithdrawalHistory(View v) {
-		if (presenter.isWithdrawInitialized()) {
+		if (listener.isWithdrawInitialized()) {
 			Intent intent = new Intent(this, WithdrawalHistoryActivity.class);
 			startActivity(intent);
 			finish();

@@ -18,7 +18,6 @@ public class CreateAccountActivity extends Activity implements UserView {
 	EditText balance;
 	EditText mir;
 	ClickListener listener;
-	BankingPresenter presenter;
 	TextView prompt;
 
 	@Override
@@ -26,8 +25,8 @@ public class CreateAccountActivity extends Activity implements UserView {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_account);
 
-		presenter = BankingPresenter.getInstance();
-		presenter.setUserView(this);
+		listener = BankingPresenter.getInstance();
+		listener.setUserView(this);
 
 		name = (EditText) findViewById(R.id.editText1);
 		display = (EditText) findViewById(R.id.editText2);
@@ -68,7 +67,7 @@ public class CreateAccountActivity extends Activity implements UserView {
 	}
 
 	public void onCreateAccountClick(View v) {
-		presenter.setUserView(this);
+		listener.setUserView(this);
 		this.listener.onCreateAccountClick();
 		if (prompt.getText().toString().length() == 0) {
 			finish();

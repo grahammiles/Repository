@@ -105,6 +105,12 @@ public class BankDataSource {
 		List<Transaction> transactions = cursorToWithdrawalList(cursor);
 		return transactions;
 	}
+	
+	public List<Transaction> findWithdrawalsForSpendingReport(String[] selectionArgs, String orderBy) {
+		Cursor cursor = database.query(BankingDBOpenHelper.TABLE_WITHDRAWAL, withdrawalColumns, "user=? AND Time1 BETWEEN ? AND ?", selectionArgs, null, null, orderBy);
+		List<Transaction> transactions = cursorToWithdrawalList(cursor);
+		return transactions;
+	}
 
 	private Map<String, User> cursorToMap(Cursor cursor) {
 		Map<String, User> users = new HashMap<String, User>();

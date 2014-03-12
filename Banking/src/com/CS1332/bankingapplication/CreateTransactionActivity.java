@@ -14,7 +14,6 @@ import com.CS1332.bankingapplication.views.TransactionView;
 public class CreateTransactionActivity extends Activity implements TransactionView {
 
 	ClickListener listener;
-	BankingPresenter presenter;
 	EditText reason;
 	EditText amount;
 	EditText dateToTakeEffect;
@@ -26,8 +25,8 @@ public class CreateTransactionActivity extends Activity implements TransactionVi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_transaction);
 
-		presenter = BankingPresenter.getInstance();
-		presenter.setTransactionView(this);
+		listener = BankingPresenter.getInstance();
+		listener.setTransactionView(this);
 		reason = (EditText) findViewById(R.id.editText1);
 		amount = (EditText) findViewById(R.id.editText2);
 		dateToTakeEffect = (EditText) findViewById(R.id.editText3);
@@ -36,7 +35,7 @@ public class CreateTransactionActivity extends Activity implements TransactionVi
 	}
 	
 	public void createTransaction(View v) {
-		presenter.setTransactionView(this);
+		listener.setTransactionView(this);
 		listener.onCreateTransactionClick();
 		if (prompt.getText().toString().length() == 0) {
 			finish();

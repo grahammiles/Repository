@@ -15,7 +15,6 @@ import com.CS1332.bankingapplication.views.ClickListener;
 public class LoginActivity extends Activity implements BankingView {
 	
 	private ClickListener listener;
-	BankingPresenter presenter;
     EditText nameField;
     EditText passwordField;
     TextView prompt;
@@ -27,8 +26,8 @@ public class LoginActivity extends Activity implements BankingView {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
-		presenter = BankingPresenter.getInstance();
-		presenter.setBankView(this);
+		listener = BankingPresenter.getInstance();
+		listener.setBankView(this);
 		
 		nameField =  (EditText) findViewById(R.id.editText1);
 		passwordField =  (EditText) findViewById(R.id.editText2);
@@ -36,8 +35,8 @@ public class LoginActivity extends Activity implements BankingView {
 		
 	}	
 	public void onLoginClick(View v) {
-		presenter.setBankView(this);
-		presenter.setRegistering(isRegistering);
+		listener.setBankView(this);
+		listener.setRegistering(isRegistering);
 		listener.onClick();
 	}
 
