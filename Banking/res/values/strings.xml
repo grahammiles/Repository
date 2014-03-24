@@ -25,5 +25,6 @@
 	<string name="date">Date</string>
 	<string name="transaction">Create Transaction</string>
 	<string name="spending_report">Spending Report</string>
+	<string name="my_account">My Account</string>
 	
 </resources>

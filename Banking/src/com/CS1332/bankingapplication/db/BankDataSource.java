@@ -52,15 +52,6 @@ public class BankDataSource {
 		dbhelper.close();
 	}
 
-	public User create(User user) {
-		ContentValues values = new ContentValues();
-		values.put(BankingDBOpenHelper.COLUMN_TITLE, user.getName());
-		values.put(BankingDBOpenHelper.COLUMN_DESC, user.getPassword());
-		long insertid = database.insert(BankingDBOpenHelper.TABLE_BANK, null, values);
-		user.setId(insertid);
-		return user;
-
-	}
 
 	public Map<String, User> findAll() {
 		Cursor cursor = database.query(BankingDBOpenHelper.TABLE_BANK, allColumns, null, null, null, null, null);
@@ -179,6 +170,15 @@ public class BankDataSource {
 		return transactions;
 	}
 
+	public User addToUser(User user) {
+		ContentValues values = new ContentValues();
+		values.put(BankingDBOpenHelper.COLUMN_TITLE, user.getName());
+		values.put(BankingDBOpenHelper.COLUMN_DESC, user.getPassword());
+		long insertid = database.insert(BankingDBOpenHelper.TABLE_BANK, null, values);
+		user.setId(insertid);
+		return user;
+	}
+	
 	public boolean addToAccount(Account account) {
 		ContentValues values = new ContentValues();
 		values.put(BankingDBOpenHelper.ACCOUNT_USER, account.getUser());
@@ -229,6 +229,16 @@ public class BankDataSource {
 		
 		String[] args = new String[] { account.getUser(), account.getName(), account.getUsername() };		
 		int result = database.update(BankingDBOpenHelper.TABLE_ACCOUNT, values, "user=? AND name=? AND username=?", args);
+		return (result != -1);
+	}
+	
+	public boolean updateUser(User user) {
+		ContentValues values = new ContentValues();
+		values.put(BankingDBOpenHelper.COLUMN_TITLE, user.getName());
+		values.put(BankingDBOpenHelper.COLUMN_DESC, user.getPassword());
+
+		String [] args = new String[] { user.getName() };
+		int result = database.update(BankingDBOpenHelper.TABLE_BANK, values, "user=?", args);
 		return (result != -1);
 	}
 }

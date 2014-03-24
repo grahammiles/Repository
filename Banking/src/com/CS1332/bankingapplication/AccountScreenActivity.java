@@ -42,6 +42,12 @@ public class AccountScreenActivity extends ListActivity {
 			intent = new Intent(this, CreateReportActivity.class);
 			startActivity(intent);
 			break;
+			
+		case R.id.my_account:
+			intent = new Intent(this, MyAccountActivity.class);
+			startActivity(intent);
+			break;
+			
 		
 		}
 		return super.onOptionsItemSelected(item);

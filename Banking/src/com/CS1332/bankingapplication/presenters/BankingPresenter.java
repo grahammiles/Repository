@@ -16,6 +16,7 @@ import com.CS1332.bankingapplication.models.Model;
 import com.CS1332.bankingapplication.models.Transaction;
 import com.CS1332.bankingapplication.models.Withdrawal;
 import com.CS1332.bankingapplication.views.BankingView;
+import com.CS1332.bankingapplication.views.ChangePasswordView;
 import com.CS1332.bankingapplication.views.ClickListener;
 import com.CS1332.bankingapplication.views.ReportView;
 import com.CS1332.bankingapplication.views.TransactionView;
@@ -25,6 +26,7 @@ public class BankingPresenter implements ClickListener {
 	private static BankingPresenter presenter;
 	private BankingView bankView;
 	private TransactionView transactionView;
+	private ChangePasswordView changePasswordView;
 	private UserView userView;
 	private ReportView reportView;
 	private Model model;
@@ -83,6 +85,21 @@ public class BankingPresenter implements ClickListener {
 			userView.setPrompt("More account information required. Please fill in all data fields.");
 		}
 
+	}
+	
+	public void onChangePasswordClick(){
+		String oldP = changePasswordView.getOldPassword();
+		String newP = changePasswordView.getNewPassword();
+		String confirmNewP = changePasswordView.confirmNewPassword();
+		
+		if(!model.isUser(username, oldP)){
+			changePasswordView.setPrompt("Incorrect old password! Please try again.");
+		}else if(!(newP.equals(confirmNewP))){
+			changePasswordView.setPrompt("New passwords do not match! Please try again");
+		}else{
+			((BankingModel) model).changePassword(username, newP);
+			changePasswordView.setPrompt("Success!");
+		}
 	}
 
 	public void onCreateTransactionClick() {
@@ -172,6 +189,10 @@ public class BankingPresenter implements ClickListener {
 	public void setTransactionView(TransactionView transactionView) {
 		this.transactionView = transactionView;
 //		this.transactionView.addSearchRequestNotifyCallback(BankingPresenter.getInstance());
+	}
+	
+	public void setChangePasswordView(ChangePasswordView changePasswordView){
+		this.changePasswordView = changePasswordView;
 	}
 
 	public void setReportView(ReportView reportView) {

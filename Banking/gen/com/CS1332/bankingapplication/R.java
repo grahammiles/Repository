@@ -25,32 +25,36 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000f;
-        public static final int build_report=0x7f08000e;
+        public static final int action_settings=0x7f080011;
+        public static final int build_report=0x7f08000f;
         public static final int button1=0x7f080005;
-        public static final int button2=0x7f08000a;
-        public static final int button3=0x7f08000b;
-        public static final int button4=0x7f08000c;
-        public static final int create_account=0x7f08000d;
+        public static final int button2=0x7f08000b;
+        public static final int button3=0x7f08000c;
+        public static final int button4=0x7f08000d;
+        public static final int change_password=0x7f080004;
+        public static final int create_account=0x7f08000e;
         public static final int editText1=0x7f080001;
-        public static final int editText2=0x7f080003;
-        public static final int editText3=0x7f080002;
-        public static final int editText4=0x7f080004;
-        public static final int imageButton1=0x7f080006;
-        public static final int imageButton2=0x7f080007;
-        public static final int report_text=0x7f080009;
-        public static final int report_title=0x7f080008;
+        public static final int editText2=0x7f080002;
+        public static final int editText3=0x7f080003;
+        public static final int editText4=0x7f080006;
+        public static final int imageButton1=0x7f080007;
+        public static final int imageButton2=0x7f080008;
+        public static final int my_account=0x7f080010;
+        public static final int report_text=0x7f08000a;
+        public static final int report_title=0x7f080009;
         public static final int textView1=0x7f080000;
     }
     public static final class layout {
         public static final int activity_account_screen=0x7f030000;
-        public static final int activity_create_account=0x7f030001;
-        public static final int activity_create_report=0x7f030002;
-        public static final int activity_create_transaction=0x7f030003;
-        public static final int activity_login=0x7f030004;
-        public static final int activity_register=0x7f030005;
-        public static final int activity_transaction=0x7f030006;
-        public static final int activity_welcome=0x7f030007;
+        public static final int activity_change_password=0x7f030001;
+        public static final int activity_create_account=0x7f030002;
+        public static final int activity_create_report=0x7f030003;
+        public static final int activity_create_transaction=0x7f030004;
+        public static final int activity_login=0x7f030005;
+        public static final int activity_my_account=0x7f030006;
+        public static final int activity_register=0x7f030007;
+        public static final int activity_transaction=0x7f030008;
+        public static final int activity_welcome=0x7f030009;
     }
     public static final class menu {
         public static final int account_screen=0x7f070000;
@@ -74,6 +78,7 @@ public final class R {
         public static final int loggedin=0x7f050006;
         public static final int login=0x7f050003;
         public static final int mir=0x7f05000d;
+        public static final int my_account=0x7f050018;
         public static final int reason=0x7f050013;
         public static final int register=0x7f050005;
         public static final int spending_report=0x7f050017;

@@ -11,6 +11,12 @@
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/build_report"/>
+    
+    <item 
+        android:id="@+id/my_account" 
+        android:title="@string/my_account" 
+        android:orderInCategory="100" 
+        android:showAsAction="always"></item>
    
 
 </menu>
