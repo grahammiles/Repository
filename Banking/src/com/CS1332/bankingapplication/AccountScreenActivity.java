@@ -55,7 +55,6 @@ public class AccountScreenActivity extends ListActivity {
 	
 	public void refreshDisplay() {
 		setListAdapter(listener.getAccountAdapter(this));
-		
 	}
 	
 	@Override
@@ -64,7 +63,6 @@ public class AccountScreenActivity extends ListActivity {
 		listener.setAccount(position);
 		Intent intent = new Intent(this, TransactionActivity.class);
 		startActivity(intent);
-		
 	}
 	
 	

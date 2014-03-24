@@ -67,7 +67,7 @@ public class BankingModel implements Model {
 	
 	public void createUser(String username, String password) {
 		datasource.open();
-		datasource.create(new User(username, password));
+		datasource.addToUser(new User(username, password));
 		datasource.close();
 		return;
 	}
@@ -167,7 +167,7 @@ public class BankingModel implements Model {
 		this.datasource.open();
 		users = this.datasource.findAll();
 		if (users.isEmpty()) {
-			this.datasource.create(new User("admin", "pass123"));
+			this.datasource.addToUser(new User("admin", "pass123"));
 			users = this.datasource.findAll();
 		}
 		this.datasource.close();
