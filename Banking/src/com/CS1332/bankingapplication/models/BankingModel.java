@@ -85,6 +85,13 @@ public class BankingModel implements Model {
 		return;
 	}
 	
+	public void updateUser(User user) {
+		datasource.open();
+		datasource.updateUser(user);
+		datasource.close();
+		return;
+	}
+	
 	public void updateAccount(Account account) {
 		datasource.open();
 		datasource.updateAccount(account);
