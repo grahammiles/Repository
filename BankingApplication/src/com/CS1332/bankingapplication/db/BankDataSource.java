@@ -237,7 +237,7 @@ public class BankDataSource {
 		values.put(BankingDBOpenHelper.COLUMN_DESC, user.getPassword());
 		
 		String [] args = new String[] { user.getName() };
-		int result = database.update(BankingDBOpenHelper.TABLE_BANK, values, "user=?", args);
+		int result = database.update(BankingDBOpenHelper.TABLE_BANK, values, "name=?", args);
 		return (result != -1);
 	}
 }

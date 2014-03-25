@@ -14,6 +14,7 @@ import com.CS1332.bankingapplication.models.BankingModel;
 import com.CS1332.bankingapplication.models.Deposit;
 import com.CS1332.bankingapplication.models.Model;
 import com.CS1332.bankingapplication.models.Transaction;
+import com.CS1332.bankingapplication.models.User;
 import com.CS1332.bankingapplication.models.Withdrawal;
 import com.CS1332.bankingapplication.views.BankingView;
 import com.CS1332.bankingapplication.views.ChangePasswordView;
@@ -97,7 +98,8 @@ public class BankingPresenter implements ClickListener {
 		}else if(!(newP.equals(confirmNewP))){
 			changePasswordView.setPrompt("New passwords do not match! Please try again");
 		}else{
-			((BankingModel) model).changePassword(username, newP);
+			model.updateUser(new User(username, newP));
+			model.initialize();
 			changePasswordView.setPrompt("Success!");
 		}
 	}

@@ -25,4 +25,5 @@ public interface Model {
 	BankDataSource getDatasource();
 	Collection<User> getUsers();
 	String getSpendingReportText(String[] args);
+	void updateUser(User user);
 }
