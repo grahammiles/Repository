@@ -47,7 +47,10 @@ public class BankingModel implements Model {
 	public void changePassword(final String username, final String password){
 		User user = users.get(username);
 		user.changePassword(password);
+		datasource.open();
 		datasource.updateUser(user);
+		datasource.close();
+		return;
 	}
 	
 	@Override
