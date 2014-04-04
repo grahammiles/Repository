@@ -146,12 +146,12 @@ public class BankingPresenter implements ClickListener {
 
         if (!model.isUser(username, oldP)) {
             changePasswordView.setPrompt("Incorrect old password! Please try again.");
-        } else if (!(newP.equals(confirmNewP))) {
-            changePasswordView.setPrompt("New passwords do not match! Please try again");
-        } else {
+        } else if ((newP.equals(confirmNewP))) {
             model.updateUser(new User(username, newP));
             model.initialize();
             changePasswordView.setPrompt("Success!");
+        } else {
+            changePasswordView.setPrompt("New passwords do not match! Please try again");
         }
     }
 

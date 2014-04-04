@@ -14,7 +14,7 @@ public class User {
      */
     private String password;
     /**
-     * Databse id.
+     * Database id.
      */
     private long id;
 
@@ -88,7 +88,7 @@ public class User {
     }
 
     /**
-     * Set databse id.
+     * Set database id.
      * 
      * @param insertid to set
      */
