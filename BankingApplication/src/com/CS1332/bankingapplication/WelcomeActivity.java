@@ -10,35 +10,54 @@ import com.CS1332.bankingapplication.db.BankDataSource;
 import com.CS1332.bankingapplication.presenters.BankingPresenter;
 import com.CS1332.bankingapplication.views.ClickListener;
 
+/**
+ * Welcome screen.
+ */
 public class WelcomeActivity extends Activity {
 
-	BankDataSource datasource;
-	ClickListener listener;
+    /**
+     * Database datasource.
+     */
+    BankDataSource datasource;
+    /**
+     * Presenter.
+     */
+    ClickListener listener;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_welcome);
-		datasource = new BankDataSource(this);
-		listener = BankingPresenter.getInstance();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_welcome);
+        datasource = new BankDataSource(this);
+        listener = BankingPresenter.getInstance();
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.welcome, menu);
-		return true;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.welcome, menu);
+        return true;
+    }
 
-	public void gotoLoginActivity(View v) {
-		listener.setRegistering(false);
-		Intent intent = new Intent(this, LoginActivity.class);
-		startActivity(intent);
-	}
+    /**
+     * Login button.
+     * 
+     * @param v view
+     */
+    public void gotoLoginActivity(View v) {
+        listener.setisRegistering(false);
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 
-	public void gotoRegisterActivity(View v) {
-		listener.setRegistering(true);
-		Intent intent2 = new Intent(this, RegisterActivity.class);
-		startActivity(intent2);
-	}
+    /**
+     * Register button.
+     * 
+     * @param v view
+     */
+    public void gotoRegisterActivity(View v) {
+        listener.setisRegistering(true);
+        Intent intent2 = new Intent(this, RegisterActivity.class);
+        startActivity(intent2);
+    }
 
 }

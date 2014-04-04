@@ -1,19 +1,32 @@
 package com.CS1332.bankingapplication.models;
 
-public class Withdrawal extends Transaction {
+/**
+ * Withdrawal class.
+ */
+public class Withdrawal extends AbstractTransaction {
 
-	public Withdrawal(String reason, Double amount, Account account) {
-		super(reason, amount, account);
-	}
-	
-	public Withdrawal() {
-		super();
-	}
+    /**
+     * Withdrawal constructor.
+     * 
+     * @param reason for withdrawal
+     * @param amount of withdrawal
+     * @param account associated with withdrawal
+     */
+    public Withdrawal(String reason, Double amount, Account account) {
+        super(reason, amount, account);
+    }
 
-	@Override
-	public Account modifyAccount(Account account) {
-		account.setBalance(account.getBalance() - this.amount);
-		return account;
-	}
+    /**
+     * Withdrawal constructor.
+     */
+    public Withdrawal() {
+        super();
+    }
+
+    @Override
+    public Account modifyAccount(Account account) {
+        account.setBalance(account.getBalance() - this.amount);
+        return account;
+    }
 
 }

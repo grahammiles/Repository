@@ -8,50 +8,75 @@ import android.view.View;
 import com.CS1332.bankingapplication.presenters.BankingPresenter;
 import com.CS1332.bankingapplication.views.ClickListener;
 
+/**
+ * Transaction type selection screen.
+ */
 public class TransactionActivity extends Activity {
 
-	ClickListener listener;
-	int position;
+    /**
+     * Presenter.
+     */
+    ClickListener listener;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_transaction);
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_transaction);
+        listener = BankingPresenter.getInstance();
 
-		listener = BankingPresenter.getInstance();
+    }
 
-	}
+    /**
+     * Deposit button.
+     * 
+     * @param v view
+     */
+    public void gotoCreateDepositActivity(View v) {
+        Intent intent = new Intent(this, CreateTransactionActivity.class);
+        listener.setisDepositing(true);
+        startActivity(intent);
+        finish();
+        return;
+    }
 
-	public void gotoCreateDepositActivity(View v) {
-		Intent intent = new Intent(this, CreateTransactionActivity.class);
-		listener.setDepositing(true);
-		startActivity(intent);
-		finish();
-		return;
-	}
+    /**
+     * Withdraw button.
+     * 
+     * @param v view
+     */
+    public void gotoCreateWithdrawalActivity(View v) {
+        Intent intent = new Intent(this, CreateTransactionActivity.class);
+        listener.setisDepositing(false);
+        startActivity(intent);
+        finish();
+        return;
+    }
 
-	public void gotoCreateWithdrawalActivity(View v) {
-		Intent intent = new Intent(this, CreateTransactionActivity.class);
-		listener.setDepositing(false);
-		startActivity(intent);
-		finish();
-		return;
-	}
+    /**
+     * Deposit history button.
+     * 
+     * @param v view
+     */
+    public void gotoDepositHistory(View v) {
+        if (listener.isDepositInitialized()) {
+            Intent intent = new Intent(this, DepositHistoryActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
-	public void gotoDepositHistory(View v) {
-		if (listener.isDepositInitialized()) {
-			Intent intent = new Intent(this, DepositHistoryActivity.class);
-			startActivity(intent);
-			finish();
-		}
-	}
-
-	public void gotoWithdrawalHistory(View v) {
-		if (listener.isWithdrawInitialized()) {
-			Intent intent = new Intent(this, WithdrawalHistoryActivity.class);
-			startActivity(intent);
-			finish();
-		}
-	}
+    /**
+     * Withdrawal history button.
+     * 
+     * @param v view
+     */
+    public void gotoWithdrawalHistory(View v) {
+        if (listener.isWithdrawInitialized()) {
+            Intent intent = new Intent(this, WithdrawalHistoryActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
 }
