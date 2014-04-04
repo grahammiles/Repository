@@ -1,7 +1,7 @@
 package com.CS1332.bankingapplication.views;
 
 /**
- * Interface for CreateReportActivity
+ * Interface for CreateReportActivity.
  */
 public interface ReportView {
 
@@ -35,6 +35,7 @@ public interface ReportView {
 
     /**
      * Set ClickListener.
+     * 
      * @param listener to be set
      */
     void addSearchRequestNotifyCallback(ClickListener listener);
